@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button>
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-back-button>
+        </ion-buttons>
+        <!-- <ion-icon *ngIf="publicacao.valorHora != null && publicacao.tipoPublicacao != null && publicacao.nomeUser != null && publicacao.areaAtuacao != null
+       && publicacao.profissao != null && publicacao.tempoExperiencia != null && publicacao.descricao != null " class="icon-card" slot="end" name="cloud-upload" (click)="salvaPublicacao()"></ion-icon> -->
+        <ion-title style="text-align: center;">Publicar</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+    <ion-select okText="Ok" cancelText="Sair" placeholder="Tipo de Publicação:" [(ngModel)]="publicacao.tipoPublicacao" *ngIf="tipoPublicacao == null" style="color: white;">
+        <ion-select-option style="text-align: left;" value="oportunidade">Oportunidade</ion-select-option>
+        <ion-select-option style="text-align: left;" value="disponibilidade">Disponibilidade</ion-select-option>
+    </ion-select>
+
+    <ion-select okText="Ok" cancelText="Sair" placeholder="Tipo de Publicação:" [(ngModel)]="dadosPublicacao.tipoPublicacao" *ngIf="valor == false" style="color: white;">
+        <ion-select-option style="text-align: left;" value="oportunidade">Oportunidade</ion-select-option>
+        <ion-select-option style="text-align: left;" value="disponibilidade">Disponibilidade</ion-select-option>
+    </ion-select>
+
+    <!-- <ion-item *ngIf="valor == false">
+        <ion-label position="floating"><b>Tipo de Publicação:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="dadosPublicacao.tipoPublicacao"></ion-input>
+    </ion-item> -->
+
+    <ion-item>
+        <ion-label position="floating"><b>Nome:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="publicacao.nomeUser" [(value)]="nomeUser"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating"><b>Area de Atuação:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="publicacao.areaAtuacao" [(value)]="areaAtuacao"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating"><b>Profissão:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="publicacao.profissao" [(value)]="profissao"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating"><b>Tempo Experiência:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="publicacao.tempoExperiencia" [(value)]="experiencia"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="tipoPublicacao == null">
+        <ion-icon slot="start" name="cash" color="success"></ion-icon>
+        <ion-label><b>Valor por hora:</b> </ion-label>
+        <ion-input type="number" [(ngModel)]="publicacao.valorHora"></ion-input>
+    </ion-item>
+
+
+    <ion-item *ngIf="valor == false">
+        <ion-icon slot="start" name="cash" color="success"></ion-icon>
+        <ion-label><b>Valor por hora:</b> </ion-label>
+        <ion-input type="number" [(ngModel)]="dadosPublicacao.valorHora" [(value)]="publicacao.valorHora"></ion-input>
+    </ion-item>
+
+    <ion-textarea *ngIf="valor == false" color="warning" style="text-align: center;" [(ngModel)]="dadosPublicacao.descricao"><b> Descreva oque procura./ Ou suas habilidades.</b> <br>
+    </ion-textarea>
+
+
+    <ion-textarea *ngIf="tipoPublicacao == null" color="warning" style="text-align: center;" [(ngModel)]="publicacao.descricao"><b> Descreva oque procura./ Ou suas habilidades.</b> <br>
+    </ion-textarea>
+
+
+</ion-content>
+
+
+<ion-tabs>
+    <ion-tab-bar slot="bottom">
+
+        <ion-tab-button *ngIf="valor == false">
+            <ion-icon name="cloud-upload" (click)="salvaPublicacao()"></ion-icon>
+            <ion-label style="color:#f5b026; font-size: larger; ">Salvar e Voltar</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button *ngIf="publicacao.valorHora && publicacao.tipoPublicacao && publicacao.descricao">
+            <ion-icon name="cloud-upload" (click)="salvaPublicacao()"></ion-icon>
+            <ion-label style="color:#f5b026; font-size: larger; ">Salvar e Voltar</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="excluirPublicacao()" [disabled]="valor">
+            <ion-icon name="close-circle"></ion-icon>
+            <ion-label style="color:#f5b026; font-size: larger; ">Excluir</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

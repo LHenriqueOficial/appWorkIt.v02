@@ -1,0 +1,155 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button>
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-back-button>
+        </ion-buttons>
+        <ion-avatar slot="end" size="small" color="primary">
+            <ion-icon class="icon-card" src="assets/icon/bancario2.svg"></ion-icon>
+        </ion-avatar>
+        <ion-title>
+            <b>Dados Finaceiros</b>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <ion-item lines="none">
+        <ion-card class="item-card">
+            <ion-card-header>
+                <ion-avatar class="teste">
+                    <img src="/assets/img/lauro.perfil.jpeg " />
+                    <ion-icon src="assets/icon/edit.svg "></ion-icon>
+                </ion-avatar>
+                <br>
+                <ion-card-title>{{usuario.nome}} {{usuario.sobrenome}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content *ngIf="usuario.idade || usuario.estado || usuario.pais">
+                {{usuario.idade}} Anos <br> {{usuario.localidade}}/{{usuario.estado}} / {{usuario.pais}} <br> {{usuario.email}}
+
+            </ion-card-content>
+        </ion-card>
+    </ion-item>
+
+
+    <ion-segment value="1" [(ngModel)]="alteraTela" color="success">
+        <ion-segment-button value="1" layout="icon-bottom">
+            <ion-icon name="cash"></ion-icon>
+            <ion-label>Dados Recebimento</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="0" layout="icon-bottom">
+            <ion-icon name="card"></ion-icon>
+            <ion-label>Dados Pagamento</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 1">
+        <ion-label position="stacked"><b>Nome do Titular:</b></ion-label>
+        <ion-input type="text" [(ngModel)]="recebimento.nomeTitular"></ion-input>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 1">
+        <ion-label position="floating"><b>Banco:</b></ion-label>
+        <ion-select okText="Ok" cancelText="Sair" [(ngModel)]="recebimento.banco">
+            <ion-select-option style="text-align: left;" *ngFor="let listaBanco of listBanco" [value]="form">{{listaBanco}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 1">
+        <ion-label position="floating"><b>Tipo de Conta:</b></ion-label>
+        <ion-select okText="Ok" cancelText="Sair" [(ngModel)]="recebimento.tipoConta">
+            <ion-select-option style="text-align: left;" value="Conta Corrente">Conta Corrente</ion-select-option>
+            <ion-select-option style="text-align: left;" value="Conta Poupança">Conta Poupança</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 1">
+        <ion-label position="floating">Agencia:</ion-label>
+        <ion-input type="text" [(ngModel)]="recebimento.agencia"></ion-input>
+    </ion-item>
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 1">
+        <ion-label position="floating">Numero Conta:</ion-label>
+        <ion-input type="text" [(ngModel)]="recebimento.numeroConta"></ion-input>
+    </ion-item>
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 1">
+        <ion-label position="floating">Digito:</ion-label>
+        <ion-input type="number" [(ngModel)]="recebimento.digito"></ion-input>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 0">
+        <ion-label position="floating"><b>Nome do Titular:</b></ion-label>
+        <ion-input type="text" style="text-transform:none" [(ngModel)]="pagamento.nomeTitular"></ion-input>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 0">
+        <ion-label position="floating">CPF:</ion-label>
+        <ion-input type="text" mask="999.999.999-99" [(ngModel)]="pagamento.cpf"></ion-input>
+    </ion-item>
+
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 0">
+        <ion-label position="floating"><b>Numero do Cartão:</b></ion-label>
+        <ion-input type="text" [(ngModel)]="pagamento.numeroCartao"></ion-input>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 0">
+        <ion-label position="floating">Data Validade:</ion-label>
+        <ion-datetime displayFormat="MM/YY" max="2050" cancelText="Sair" [(ngModel)]="pagamento.dataValidade"></ion-datetime>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 0">
+        <ion-label position="floating">Codigo Validação:</ion-label>
+        <ion-input type="number" [(ngModel)]="pagamento.codigoValidacao"></ion-input>
+    </ion-item>
+
+
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 2">
+        <ion-label position="floating"><b>Nome do Titular:</b></ion-label>
+        <ion-input type="text" style="text-transform:none" [(ngModel)]="pagamento.nomeTitular"></ion-input>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 2">
+        <ion-label position="floating">CPF:</ion-label>
+        <ion-input type="text" [(ngModel)]="pagamento.cpf"></ion-input>
+    </ion-item>
+
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 2">
+        <ion-label position="floating"><b>Numero do Cartão:</b></ion-label>
+        <ion-input type="text" [(ngModel)]="pagamento.numeroCartao"></ion-input>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 2">
+        <ion-label position="floating">Data Validade:</ion-label>
+        <ion-datetime displayFormat="MM/YY" max="2050" cancelText="Sair" [(ngModel)]="pagamento.dataValidade"></ion-datetime>
+    </ion-item>
+
+    <ion-item style="text-align: start; margin-left: auto; " *ngIf="alteraTela == 2">
+        <ion-label position="floating">Codigo Validação:</ion-label>
+        <ion-input type="number" [(ngModel)]="pagamento.codigoValidacao"></ion-input>
+    </ion-item>
+
+
+</ion-content>
+
+
+<ion-footer *ngIf="alteraTela == 1">
+    <ion-toolbar>
+        <ion-button (click)="updateDadosRecebimento() " size="small " expand="block ">Salvar e voltar</ion-button>
+    </ion-toolbar>
+</ion-footer>
+<ion-footer *ngIf="alteraTela == 0">
+    <ion-toolbar>
+        <ion-button (click)="updateDadosPagamento() " size="small " expand="block ">Salvar e voltar</ion-button>
+    </ion-toolbar>
+</ion-footer>
+
+<ion-footer *ngIf="alteraTela == 2">
+    <ion-toolbar>
+        <ion-button (click)="updateDadosPagamento2() " size="small " expand="block ">Salvar e Continuar Pagamento</ion-button>
+    </ion-toolbar>
+</ion-footer>

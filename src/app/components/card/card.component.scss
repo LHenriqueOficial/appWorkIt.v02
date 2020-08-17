@@ -1,0 +1,27 @@
+ion-card {
+    height: 100%;
+    width: 90%;
+    // top: 20%;
+    // padding: 10%;
+    // position: absolute;
+    // display: block;
+    // border-radius: 2%;
+}
+
+.icon-card {
+    font-family: 'Times New Roman';
+    font-size: 30px;
+    color: #f5b026;
+}
+
+.alertDanger {
+    --background-color: white;
+    --color: red;
+    button {
+        color: red;
+    }
+}
+
+.my-custom-class {
+    background: red;
+}

@@ -1,0 +1,51 @@
+<ion-app>
+    <ion-split-pane contentId="main-content">
+        <ion-menu contentId="main-content" type="overlay">
+            <ion-content>
+                <ion-list id="inbox-list">
+                    <ion-list-header>{{nomeUser}} {{sobreNome}}</ion-list-header>
+                    <ion-note>{{email}}</ion-note>
+                    <ion-item>
+                        <ion-icon slot="start" name="cash" color="success"></ion-icon>
+                        <label><b>Saldo = </b> {{saldo}}</label>
+                        <!-- <ion-list-header>Saldo = {{saldo}}</ion-list-header> -->
+                    </ion-item>
+
+
+
+
+                    <!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index"> -->
+                    <ion-menu-toggle auto-hide="false">
+
+                        <ion-item (click)="logOut()">
+                            <ion-icon slot="start" color="danger" class="icon-card" src="assets/icon/exit.svg"></ion-icon>
+                            <label> <b> Sair </b></label>
+                        </ion-item>
+
+                        <ion-item (click)="showPage('inicial')">
+                            <ion-icon slot="start" color="dark" class="icon-card" name="home"></ion-icon>
+                            <label> <b>Página Inicial</b></label>
+                        </ion-item>
+
+                    </ion-menu-toggle>
+                </ion-list>
+
+                <ion-list id="labels-list">
+                    <ion-list-header>Relatórios</ion-list-header>
+
+                    <ion-item lines="none" (click)="showPage('relatorio-movimentacao')">
+                        <ion-icon slot="start" name="trending-up" color="danger"></ion-icon>
+                        <ion-label><b>Suas Movimentações</b></ion-label>
+                    </ion-item>
+
+                    <ion-item lines="none" (click)="showPage('relatorios-sistema')">
+                        <ion-icon slot="start" name="bar-chart" color="danger"></ion-icon>
+                        <ion-label><b>Relatório Sistema</b></ion-label>
+
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-menu>
+        <ion-router-outlet id="main-content"></ion-router-outlet>
+    </ion-split-pane>
+</ion-app>

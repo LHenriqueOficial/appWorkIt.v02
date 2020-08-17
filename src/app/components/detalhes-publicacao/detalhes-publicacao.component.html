@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-icon class="icon-card" name="close" (click)="fecharModal()"></ion-icon>
+        <ion-title>{{public.tipoPublicacao}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-item>
+        <ion-label position="floating"><b>Nome:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="public.nomeUser" [(value)]="public.nomeUser"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating"><b>Area de Atuação:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="public.areaAtuacao" [(value)]="public.areaAtuacao"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating"><b>Profissão:</b> </ion-label>
+        <ion-input type="text" [(ngModel)]="public.profissao" [(value)]="public.profissao"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating"><b>Tempo Experiência:</b> </ion-label>
+        <ion-input type="text" [(value)]="public.tempoExperiencia"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" name="cash" color="success"></ion-icon>
+        <ion-label><b>Valor por hora:</b> </ion-label>
+        <ion-label>{{public.valorHora}} </ion-label>
+    </ion-item>
+
+    <ion-textarea color="dark" [(value)]="public.descricao"><b>Descricao da {{public.tipoPublicacao}}.</b> </ion-textarea>
+
+
+</ion-content>
+
+<ion-item>
+    <ion-footer>
+        <ion-tabs>
+            <ion-tab-bar slot="bottom">
+                <ion-tab-button (click)="rota(public.userId)" [disabled]="valor">
+                    <ion-icon class="icon-mensagem" name="send"></ion-icon>
+                    <ion-label color="dark"><b>Enviar Mensagen</b> </ion-label>
+                </ion-tab-button>
+
+
+                <ion-tab-button (click)="addUserPainel()" [disabled]="valor">
+                    <ion-icon class="icon-mensagem" name="terminal"></ion-icon>
+                    <ion-label color="dark"><b> Add ao Painel</b></ion-label>
+                </ion-tab-button>
+
+                <!-- <ion-tab-button (click)="excluirUserPainel(public.status,public.id)" [disabled]="valor2">
+                    <ion-icon class="icon-mensagem" name="close-circle"></ion-icon>
+                    <ion-label color="dark"><b>Excluir Publicação</b> </ion-label>
+                </ion-tab-button> -->
+                <br>
+
+            </ion-tab-bar>
+        </ion-tabs>
+    </ion-footer>
+</ion-item>

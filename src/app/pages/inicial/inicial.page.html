@@ -1,0 +1,86 @@
+<ion-header>
+    <ion-toolbar>
+
+        <ion-icon class="icon-start" name="cog" slot="start" (click)="rota()"></ion-icon>
+        <!-- routerLink="/edit-perfil" -->
+        <ion-avatar slot="end" size="small" (click)="OpenImagem()">
+            <img src="/assets/img/lauro.perfil.jpeg" />
+        </ion-avatar>
+        <ion-title style="text-align: center; "><b>{{nomeUser}} {{sobreNome}}</b> </ion-title>
+        <ion-label>
+            <br><br>
+            <p style="text-align: center;">{{profissao}}</p>
+        </ion-label>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+
+    <!-- <div class="map-wrapper">
+        <div id="map_center">
+            <img src="assets/icon/location-marker.png" />
+        </div>
+        <div #map id="map"></div>
+    </div> -->
+
+    <!-- <ion-grid>
+        <ion-row>
+            <ion-col size="3">
+                <b>Lattitude</b>
+            </ion-col>
+            <ion-col>
+                {{latitude}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="3">
+                <b>Longitude</b>
+            </ion-col>
+            <ion-col>
+                {{longitude}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="3">
+                <b>Address</b>
+            </ion-col>
+            <ion-col>
+                {{address}}
+            </ion-col>
+        </ion-row>
+    </ion-grid> -->
+
+</ion-content>
+
+
+<ion-tabs>
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button>
+            <ion-icon name="home"></ion-icon>
+            <ion-label>Home</ion-label>
+        </ion-tab-button>
+        <!-- <ion-tab-button (click)="showCard()" [disabled]="valor">
+            <ion-icon name="cloud-upload"></ion-icon>
+            <ion-label>Publicar</ion-label>
+        </ion-tab-button> -->
+        <ion-tab-button (click)="showScreen('publicacao')" [disabled]="valor">
+            <ion-icon name="cloud-upload"></ion-icon>
+            <ion-label>Publicar</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="showScreen('painel-usuario')">
+            <ion-icon name="terminal"></ion-icon>
+            <ion-label>Painel</ion-label>
+        </ion-tab-button>
+        <!-- <ion-tab-button (click)="showScreen('menssagens-usuario')">
+            <ion-icon name="mail"></ion-icon>
+            <ion-label>Mensagem</ion-label>
+            <ion-badge>6</ion-badge>
+        </ion-tab-button> -->
+        <ion-tab-button (click)="showScreen('atualizacao')">
+            <ion-icon name="layers"></ion-icon>
+            <ion-label>Atualização</ion-label>
+            <ion-badge>{{quantidadePublicacao}}</ion-badge>
+        </ion-tab-button>
+
+    </ion-tab-bar>
+</ion-tabs>
