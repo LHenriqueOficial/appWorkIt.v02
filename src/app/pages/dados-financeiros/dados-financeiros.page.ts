@@ -106,14 +106,9 @@ export class DadosFinanceirosPage implements OnInit {
   "contaRecebimento.numeroConta": this.recebimento.numeroConta,
   "contaRecebimento.digito": this.recebimento.digito, 
 
-}).then(async function() {   
-  
-  console.log("Document successfully updated!");
-}).catch(async function(error) {
-  
-  console.error("Error updating document: ", error);
- 
 })
+this.alertUpadateDadosRecebimento();
+
   }
 
   async updateDadosPagamento(){
@@ -127,14 +122,8 @@ export class DadosFinanceirosPage implements OnInit {
      "cartaoPagamento.dataValidade": this.pagamento.dataValidade, 
      "cartaoPagamento.codigoValidacao": this.pagamento.codigoValidacao,
      
-   }).then(async function() {   
-     
-     console.log("Document successfully updated!");
-   }).catch(async function(error) {
-     
-     console.error("Error updating document: ", error);
-    
    })
+   this.alertUpadateDadosPagamentos();
     
   }
 
@@ -150,18 +139,10 @@ export class DadosFinanceirosPage implements OnInit {
      "cartaoPagamento.dataValidade": this.pagamento.dataValidade, 
      "cartaoPagamento.codigoValidacao": this.pagamento.codigoValidacao,
      
-   }).then(function()  {   
-     
-     console.log("Document successfully updated!");
-
-    
-   }).catch(async function(error) {
-     
-     console.error("Error updating document: ", error);
-    
    })
+  
    this.router.navigate(['/detalhes-painel',this.idUserPainel])
-
+   this.alertUpadateDadosPagamentos();
   }
 
 
@@ -176,5 +157,33 @@ export class DadosFinanceirosPage implements OnInit {
     const toast = await this.toastCtrl.create({ message, duration: 3000 });
     toast.present();
   }
+
+  
+  async alertUpadateDadosPagamentos(){
+    const alert = await this.AlertCtrl.create({
+      header:'Aviso',
+      subHeader:'Dados Pagamento Salvo com Sucesso',
+      // message: '<img src="/assets/img/engrenagem-100.png" />',
+      buttons: ['Ok'],
+      
+    });
+
+    await alert.present();
+      }
+
+
+      async alertUpadateDadosRecebimento(){
+        const alert = await this.AlertCtrl.create({
+          header:'Aviso',
+          subHeader:'Dados Recebimento Salvo com Sucesso',
+          // message: '<img src="/assets/img/engrenagem-100.png" />',
+          buttons: ['Ok'],
+          
+        });
+    
+        await alert.present();
+          }
+    
+
 
 }

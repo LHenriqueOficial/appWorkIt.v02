@@ -6,7 +6,6 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { PublicacaoService } from 'src/app/services/publicacao.service';
 import { PainelUsuarioService } from 'src/app/services/painel-usuario.service';
 import { Movimentacao } from 'src/app/Model/movimentacao';
-import { Publicacao } from 'src/app/Model/publicacao';
 import { PainelUsuario } from 'src/app/Model/painel-usuario';
 import { Subscription, Observable } from 'rxjs';
 import { MovimentacaoService } from 'src/app/services/movimentacao.service';
@@ -17,6 +16,7 @@ import { ContaSistema } from 'src/app/Model/conta-sistema';
 import { ContaSistemaService } from 'src/app/services/conta-sistema.service';
 import { UsuarioService } from './../../services/usuario.service';
 import { CartaoPagamento } from 'src/app/Model/cartao-pagamento';
+import { Publicacao } from './../../Model/publicacao';
 
 
 
@@ -72,8 +72,9 @@ export class DetalhesPainelPage implements OnInit {
   desabilitaMensagem: boolean = false;
   usuarioPainel: PainelUsuario={};
   valorPublicacao: any;
-  publicacao: any;
+  publicacao = new Array<Publicacao>();
   valorContagem: number =1;
+  tipoPublicacao: any;
   
   // usuario: any;
  
@@ -95,13 +96,31 @@ export class DetalhesPainelPage implements OnInit {
     private painelUserService: PainelUsuarioService,
     public moviService: MovimentacaoService,
     private navCtrl: NavController,
+    private publicService: PublicacaoService,
+
   ) { 
 
     this.fbAuth.authState.subscribe(user=>{
       if (user){
         this.userId = user.uid;
       }
+      let lista=this.db.collection<Publicacao>("Publicacao")
+      lista.ref.where("userId", "==" ,this.userId).get().then(res =>{
+       res.forEach(doc => {
+        this.publicacao.push(doc.data())
+         console.log(doc.id, ' => ' , doc.data())
+         this.tipoPublicacao= doc.data().tipoPublicacao
+        //  this.valorServico = doc.data().valorServico
+       
+       })
+  
+  
+      })
+
     })
+
+  
+
 
     this.idPainelUser = this.activatedRoute.snapshot.params['id'];
     console.log(this.idPainelUser);
@@ -137,7 +156,10 @@ export class DetalhesPainelPage implements OnInit {
     this.painelUserService.getPainelUser(this.idPainelUser).subscribe(data =>{
       this.usuarioPainel = data;
       console.log(this.usuarioPainel);
-      this.loadMovimentacao();
+      if(this.usuarioPainel.status != ''){
+        this.loadMovimentacao();
+      }
+     
     })
 
   }
@@ -202,12 +224,14 @@ export class DetalhesPainelPage implements OnInit {
       this.usuarioPainel.idMovimentacao = this.movimentacao.idMovimentacao
 
       this.moviService.addMovimentacao(this.movimentacao)
-          //  this.alertaSevicoIniciado();
-          //  this.navCtrl.navigateForward('painel-usuario')    
-  
+           this.alertaSevicoIniciado();
+           this.navCtrl.navigateForward('painel-usuario')
+
+    this.contaSistemaService.updateContaSistema(this.idContaSistema, this.contaSistem)
     this.painelUserService.updatePainelUser(this.idPainelUser,this.usuarioPainel);
 
 
+    this.ngOnInit();
     }
   
 

@@ -38,7 +38,7 @@
     </ion-item>
 
     <ion-item lines="full" *ngIf="userPainel.status == 'Em execucao'">
-        <ion-icon name="calendar" color="dark"> </ion-icon>
+        <ion-icon name="calendar" style="color: #f5b026;"> </ion-icon>
         <ion-label><b>Hora de Inicio: </b> </ion-label>
         <ion-label>{{movimentacao.horaInicio | date:'dd-MM-yyyy HH:mm'}}</ion-label>
     </ion-item>
@@ -68,7 +68,7 @@
         <ion-label>{{movimentacao.horaFinal | date:'dd-MM-yyyy HH:mm'}}</ion-label>
     </ion-item>
 
-    <ion-item lines="full" *ngIf="userPainel.status == null">
+    <ion-item lines="full" *ngIf="userPainel.status == '' ">
         <ion-icon slot="start" name="cash" color="success"></ion-icon>
         <ion-label><b>Valor por hora:</b> </ion-label>
         <ion-label>R${{userPainel.valorHora}} </ion-label>
@@ -164,7 +164,7 @@
     <ion-tabs>
         <ion-tab-bar slot="bottom">
 
-            <ion-tab-button *ngIf="userPainel.status == ''" (click)="iniciaServico(public.id, 'Em execucao')">
+            <ion-tab-button *ngIf="userPainel.status == '' && tipoPublicacao == 'oportunidade' " (click)="iniciaServico(public.id, 'Em execucao')">
                 <ion-icon class="icon-mensagem" name="logo-google-playstore"></ion-icon>
                 <ion-label style=" font-size: larger; color: #f5b026; "><b>Inicia Serviço</b> </ion-label>
             </ion-tab-button>
@@ -185,7 +185,7 @@
     </ion-tabs>
 </ion-item>
 
-<ion-item lines="none" *ngIf="userPainel.status == 'Finalizado'">
+<ion-item lines="none" *ngIf="tipoPublicacao == 'oportunidade' && userPainel.status == 'Finalizado'">
     <ion-footer>
         <ion-toolbar>
             <ion-button color="warning" [routerLink]="['/pagamentos',idPainelUser]" size="small " expand="block "><b>Iniciar Pagamento</b></ion-button>

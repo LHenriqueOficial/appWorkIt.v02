@@ -124,17 +124,24 @@ var user = await this.db.collection("Usuarios").doc(this.id);
    "formacao.descricao": this.formacao, 
    "formacao.titulo": this.titulo,
   
-}).then(async function() {   
-  
-  console.log("Document successfully updated!");
-  
-}).catch(async function(error) {
-  
-  console.error("Error updating document: ", error);
- 
 })
+ this.alertAtualizacaoConcluida()
+
 
 }
+
+async alertAtualizacaoConcluida(){
+  const alert = await this.AlertCtrl.create({
+    header:'Aviso',
+    subHeader:'Perfil Profissional Alterado com Sucesso',
+    // message: '<img src="/assets/img/engrenagem-100.png" />',
+    buttons: ['Ok'],
+    
+  });
+
+  await alert.present();
+    }
+
 
 async presentLoading() {
   this.loading = await this.loadingCtrl.create({ message: 'Aguarde...' });

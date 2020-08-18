@@ -102,6 +102,7 @@
     <plugin name="cordova-plugin-googlemaps" spec="^2.7.1" />
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="(AIzaSyD89ehMe8mmE5mxN5d1H2m_dzGuCSfjFro)" />
     <preference name="GOOGLE_MAPS_IOS_API_KEY" value="(AIzaSyD89ehMe8mmE5mxN5d1H2m_dzGuCSfjFro)" />
-    <engine name="browser" spec="5.0.4" />
     <plugin name="cordova-plugin-geolocation" spec="4.0.2" />
+    <engine name="browser" spec="5.0.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>
